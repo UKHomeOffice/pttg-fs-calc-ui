@@ -1,0 +1,11 @@
+.DS_Store
+_temp
+audit.csv
+.classpath
+.project
+.idea
+.settings/*
+.gradle/*
+node_modules
+.tags*
+public
