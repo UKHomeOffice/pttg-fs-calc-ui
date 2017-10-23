@@ -323,7 +323,7 @@ describe('app: hod.proving', function () {
         expect(result.dependants).toEqual(1)
         expect(result.dependantsOnly).toBeFalsy()
         expect(result.courseType).toEqual('main')
-        expect(result.recognisedBodyOrHEI).toEqual('something')
+        expect(result.recognisedBodyOrHEI).toBeFalsy()
         expect(result.courseStartDate).toEqual('11/11/2011')
         expect(result.courseEndDate).toEqual('12/12/2012')
 

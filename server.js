@@ -1,7 +1,7 @@
 const express = require('express')
 const serveStatic = require('serve-static')
 const app = express()
-const apiRoot = process.env.API_ROOT || 'http://localhost:8081'
+const apiRoot = process.env.API_ROOT || 'http://localhost:8050'
 const uiBaseUrl = '/pttg/financialstatus/v1/'
 const apiBaseUrl = apiRoot + '/pttg/financialstatus/v1/'
 const request = require('request')
@@ -92,7 +92,7 @@ app.get(uiBaseUrl + ':tier/threshold', (req, res) => {
   //     message: 'OK'
   //   }
   // })
-  stdRelay(req, res, apiBaseUrl + req.params.tier + '/threshold', req.query)
+  stdRelay(req, res, apiBaseUrl + req.params.tier + '/maintenance/threshold', req.query)
 })
 
 app.get(uiBaseUrl + ':tier/conditioncodes', (req, res) => {

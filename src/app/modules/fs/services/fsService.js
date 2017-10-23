@@ -395,7 +395,7 @@ fsServiceModule.factory('FsService', ['$filter', 'FsInfoService', 'IOService', '
       dependants: obj.dependants,
       dependantsOnly: obj.dependantsOnly,
       courseType: obj.courseType,
-      recognisedBodyOrHEI: obj.courseInstitution
+      recognisedBodyOrHEI: (obj.courseInstitution === 'recognised')
     }
 
     if (obj.courseEndDate) {

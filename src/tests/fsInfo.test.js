@@ -111,7 +111,7 @@ describe('app: hod.proving', function () {
     describe('getAllFieldInfo', function () {
       it('should return a list of all available fields', function () {
         var fieldInfo = fsi.getAllFieldInfo()
-        expect(_.keys(fieldInfo).length).toEqual(17)
+        expect(_.keys(fieldInfo).length).toEqual(14)
         expect(_.has(fieldInfo, 'applicationRaisedDate')).toBeTruthy()
       })
     })
