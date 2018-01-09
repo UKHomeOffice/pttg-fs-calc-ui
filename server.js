@@ -39,7 +39,8 @@ const stdRelay = (req, res, uri, qs) => {
   }
   opts = addCaCertsForHttps(opts, headers)
 
-  console.log(uri)
+  // console.log(uri)
+  // console.log(qs)
 
   request(opts, (error, response, body) => {
     let status = (response && response.statusCode) ? response.statusCode : 500
@@ -49,6 +50,8 @@ const stdRelay = (req, res, uri, qs) => {
     res.setHeader('Content-Type', 'application/json')
     res.status(status)
     res.send(body)
+    // console.log(body)
+    // console.log(status)
 
     if (error) {
       if (error.code === 'ECONNREFUSED') {

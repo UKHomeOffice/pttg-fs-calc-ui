@@ -14,7 +14,7 @@ chai.use(chaiAsPromised)
 // console.log(_.keys(actions))
 
 const urls = {
-  threshold: '/pttg/financialstatus/v1/:tier/threshold',
+  threshold: '/pttg/financialstatus/v1/:tier/maintenance/threshold',
   conditionCodes: '/pttg/financialstatus/v1/:tier/conditioncodes'
 }
 

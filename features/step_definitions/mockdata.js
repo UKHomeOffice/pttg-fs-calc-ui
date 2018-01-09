@@ -32,7 +32,10 @@ exports = module.exports = {
     res.withStatus(status || 200)
     res.withHeader({'Content-Type': 'application/json'})
     if (file) {
+      // console.log('stubItFile', u, file)
       res.withBody(fs.readFileSync('features/test-data/' + file, 'utf8'))
+    } else {
+      // console.log('FILE NOT DEFINED')
     }
     stubFor(this.jswm, get(urlEqualTo(u)).willReturn(res))
   },
