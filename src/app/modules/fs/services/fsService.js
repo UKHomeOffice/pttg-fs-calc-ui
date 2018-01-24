@@ -339,7 +339,7 @@ fsServiceModule.factory('FsService', ['$filter', 'FsInfoService', 'IOService', '
 
     var plain = ''
     var results = me.getResults(obj)
-    var criteria = angular.merge(me.getCriteria(obj), me.getConsentCriteria(obj))
+    var criteria = me.getCriteria(obj)
 
     plain += '## Results ##\n'
     _.each(results, function (r, k) {
