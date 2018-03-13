@@ -1,4 +1,4 @@
-FROM quay.io/ukhomeofficedigital/nodejs-base:v6.11.0-0
+FROM quay.io/ukhomeofficedigital/nodejs-base:v6.11.1
 
 ENV PTTG_API_ENDPOINT localhost
 ENV USER pttg
@@ -10,7 +10,7 @@ ARG VERSION
 WORKDIR /app
 
 RUN groupadd -r ${GROUP} && \
-    useradd -r -g ${GROUP} ${USER} -d /app && \
+    useradd -g ${GROUP} ${USER} -d /app && \
     mkdir -p /app && \
     chown -R ${USER}:${GROUP} /app
 
