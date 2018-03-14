@@ -51,7 +51,7 @@
     "chai-as-promised": "^6.0.0",
     "chalk": "^1.1.1",
     "chartist": "^0.11.0",
-    "chromedriver": "2.32.3",
+    "chromedriver": "2.30.1",
     "csvtojson": "^1.1.9",
     "cucumber": "^2.2.0",
     "cucumber-html-reporter": "^0.4.2",
@@ -67,7 +67,7 @@
     "karma-chrome-launcher": "^2.2.0",
     "karma-jasmine": "^1.1.1",
     "karma-spec-reporter": "0.0.26",
-    "selenium-webdriver": "^3.6.0",
+    "selenium-webdriver": "^3.4.0",
     "snyk": "^1.66.0",
     "standard": "^10.0.2"
   }
