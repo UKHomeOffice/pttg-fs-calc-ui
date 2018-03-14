@@ -20,6 +20,8 @@ RUN npm --loglevel warn run postinstall
 
 RUN chown -R ${USER}:${GROUP} /app
 
+RUN chmod a+x /app/run-test.sh
+
 USER pttg
 
 ENTRYPOINT /app/run-test.sh
