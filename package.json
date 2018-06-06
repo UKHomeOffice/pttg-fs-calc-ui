@@ -6,7 +6,7 @@
     "init": "npm install",
     "test": "gulp test",
     "test:all": "npm run test:unit && npm run test:bdd",
-    "test:unit": "gulp test",
+    "test:unit": "gulp",
     "test:bdd": "./node_modules/.bin/cucumber.js",
     "postinstall": "gulp"
   },
@@ -23,7 +23,7 @@
     "govuk_frontend_toolkit": "^5.2.0",
     "graceful-fs": "^4.1.11",
     "gulp": "^3.9.1",
-    "gulp-angular-templatecache": "^2.2.1",
+    "gulp-angular-templatecache": "^2.0.0",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-compass": "^2.1.0",
     "gulp-concat": "^2.6.1",
