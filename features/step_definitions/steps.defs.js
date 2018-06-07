@@ -128,13 +128,10 @@ const confirmContentById = function (d, data, timeoutLength) {
   _.each(data, function (val, key) {
     const expectation = new Promise(function (resolve, reject) {
       d.wait(until.elementLocated({id: key}), timeoutLength || 5 * 1000, 'TIMEOUT: Waiting for element #' + key).then(function (el) {
-                // wait until driver has located the element
-        return expect(el.getText()).to.eventually.equal(val)
+        return el.getText()
       }).then(function (result) {
-                // test OK
-        return resolve(result)
+        return resolve(expect(result).to.equal(val))
       }, function (err) {
-                // test failed
         return reject(err)
       })
     })
