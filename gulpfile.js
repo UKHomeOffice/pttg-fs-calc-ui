@@ -10,7 +10,6 @@ var templateCache = require('gulp-angular-templatecache')
 var concat = require('gulp-concat')
 var plumber = require('gulp-plumber')
 var gutil = require('gulp-util')
-// var sass = require('gulp-sass')
 var autoprefixer = require('gulp-autoprefixer')
 var htmlmin = require('gulp-htmlmin')
 var sourcemaps = require('gulp-sourcemaps')
@@ -55,14 +54,6 @@ var config = {
 
 gulp.task('assets', function () {
   gulp.src([sourcePath + 'assets/**/*']).pipe(gulp.dest(target + 'assets'))
-})
-
-gulp.task('sass', function () {
-  return gulp.src(config.sass.src)
-    .pipe(plumber({ errorHandler: onError }))
-    .pipe(autoprefixer(config.autoprefixer.browsers))
-    .pipe(sass(config.sass.options)) // Using gulp-sass
-    .pipe(gulp.dest(target + 'styles'))
 })
 
 gulp.task('sassjs', function () {
@@ -130,7 +121,6 @@ gulp.task('vendor', function () {
     'node_modules/moment/min/moment.min.js',
     'node_modules/chartist/dist/chartist.min.js',
     'node_modules/clipboard/dist/clipboard.min.js'
-    // 'node_modules/govuk_frontend_toolkit/javascripts/govuk/selection-buttons.js'
   ])
   .pipe(plumber())
   .pipe(concat('vendor.js'))

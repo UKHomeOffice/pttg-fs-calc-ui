@@ -60,7 +60,6 @@ Feature: Total Funds Required Calculation - Tier 4 Student Doctorate In London (
   Scenario: User clicks on the Begin a new search button after completing financial status check
     Given the financial status check is performed
     When the new search button is clicked
-    And after at least 1 seconds
     Then the service displays the following page content
       | Page title | Type of application |
 
