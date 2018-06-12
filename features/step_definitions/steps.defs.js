@@ -130,6 +130,11 @@ const confirmContentById = function (d, data, timeoutLength) {
       d.wait(until.elementLocated({id: key}), timeoutLength || 5 * 1000, 'TIMEOUT: Waiting for element #' + key).then(function (el) {
         return el.getText()
       }).then(function (result) {
+        // here we are removing line breaks from both the bdd sepcified value and the return from Chromedriver
+        // because of an issue where in some environments it compares \n correctly and in others it doesn't
+        val = val.replace(/\n/g, ' ')
+        result = result.replace(/\n/g, ' ')
+
         return resolve(expect(result).to.equal(val))
       }, function (err) {
         return reject(err)
@@ -144,16 +149,19 @@ const confirmInputValuesById = function (d, data) {
   const promises = []
   let xpath
   let expectation
+
   _.each(data, function (val, key) {
     if (isRadio(key)) {
       const theRadio = _.findWhere(radioElements[key], {value: val})
       xpath = '//input[@id="' + key + '-' + theRadio.key + '"]'
+
       expectation = d.wait(until.elementLocated({xpath: xpath}), 1000, 'TIMEOUT: Waiting for element ' + xpath).then(function (el) {
         return expect(el.isSelected()).to.eventually.equal(true)
       })
     } else {
       expectation = new Promise(function (resolve, reject) {
         xpath = '//input[@id="' + key + '"]'
+
         expectation = d.wait(until.elementLocated({xpath: xpath}), 1000, 'TIMEOUT: Waiting for element ' + xpath).then(function (el) {
                     // wait until driver has located the element
           return el.getAttribute('value')

@@ -21,6 +21,7 @@ Feature: Edit search button to return UI populated with current values (for all 
       | Continuation course     | No         |
       | Accommodation fees paid | 100        |
     When the edit search button is clicked
+    And after at least 1 seconds
     Then the inputs will be populated with
       | End Date                | 01/05/2016 |
       | Application raised date | 02/05/2016 |
