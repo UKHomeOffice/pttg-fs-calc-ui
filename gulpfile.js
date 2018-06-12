@@ -4,16 +4,16 @@ var sourcePath = 'src/'
 var gulp = require('gulp')
 var async = require('async')
 var run = require('run-sequence')
-
+var fs = require('fs')
 var uglify = require('gulp-uglify')
 var templateCache = require('gulp-angular-templatecache')
 var concat = require('gulp-concat')
 var plumber = require('gulp-plumber')
 var gutil = require('gulp-util')
-var sass = require('gulp-sass')
 var autoprefixer = require('gulp-autoprefixer')
 var htmlmin = require('gulp-htmlmin')
 var sourcemaps = require('gulp-sourcemaps')
+var sassjs = require('sass')
 
 // error function for plumber
 var onError = function (err) {
@@ -56,12 +56,25 @@ gulp.task('assets', function () {
   gulp.src([sourcePath + 'assets/**/*']).pipe(gulp.dest(target + 'assets'))
 })
 
-gulp.task('sass', function () {
-  return gulp.src(config.sass.src)
-    .pipe(plumber({ errorHandler: onError }))
-    .pipe(autoprefixer(config.autoprefixer.browsers))
-    .pipe(sass(config.sass.options)) // Using gulp-sass
-    .pipe(gulp.dest(target + 'styles'))
+gulp.task('sassjs', function () {
+  sassjs.render({
+    file: config.sass.src,
+    includePaths: ['node_modules/govuk-elements-sass/public/sass',
+      'node_modules/govuk_frontend_toolkit/stylesheets',
+      'node_modules/chartist/dist/scss'
+    ],
+    outFile: target + 'styles',
+    outputStyle: 'compressed'
+  }, function (err, result) {
+    if (!err) {
+      // No errors during the compilation, write this result on the disk
+      fs.writeFile(target + 'styles/main.css', result.css, function (err) {
+        if (!err) {
+          // file written on disk
+        }
+      })
+    }
+  })
 })
 
 gulp.task('minifyHtml', function () {
@@ -108,7 +121,6 @@ gulp.task('vendor', function () {
     'node_modules/moment/min/moment.min.js',
     'node_modules/chartist/dist/chartist.min.js',
     'node_modules/clipboard/dist/clipboard.min.js'
-    // 'node_modules/govuk_frontend_toolkit/javascripts/govuk/selection-buttons.js'
   ])
   .pipe(plumber())
   .pipe(concat('vendor.js'))
@@ -155,7 +167,7 @@ gulp.task('test', function (done) {
   server.start()
 })
 
-gulp.task('build', ['assets', 'sass', 'minifyHtml', 'vendor', 'templateAndUglify'])
+gulp.task('build', ['assets', 'sassjs', 'minifyHtml', 'vendor', 'templateAndUglify'])
 gulp.task('watch', ['startwatch', 'vendor'])
 gulp.task('default', ['build'])
 gulp.task('inline', ['default', 'inlineHTML'])
