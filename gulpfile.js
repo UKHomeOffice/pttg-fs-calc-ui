@@ -5,12 +5,12 @@ var gulp = require('gulp')
 var async = require('async')
 var run = require('run-sequence')
 var fs = require('fs')
+var mkdirp = require('mkdirp')
 var uglify = require('gulp-uglify')
 var templateCache = require('gulp-angular-templatecache')
 var concat = require('gulp-concat')
 var plumber = require('gulp-plumber')
 var gutil = require('gulp-util')
-var autoprefixer = require('gulp-autoprefixer')
 var htmlmin = require('gulp-htmlmin')
 var sourcemaps = require('gulp-sourcemaps')
 var sassjs = require('sass')
@@ -37,18 +37,6 @@ var config = {
         'node_modules/chartist/dist/scss'
       ]
     }
-  },
-  autoprefixer: {
-    browsers: [
-      'last 2 versions',
-      'safari 5',
-      'ie 8',
-      'ie 9',
-      'opera 12.1',
-      'ios 6',
-      'android 4'
-    ],
-    cascade: true
   }
 }
 
@@ -68,10 +56,9 @@ gulp.task('sassjs', function () {
   }, function (err, result) {
     if (!err) {
       // No errors during the compilation, write this result on the disk
+      mkdirp.sync(target + 'styles')
       fs.writeFile(target + 'styles/main.css', result.css, function (err) {
-        if (!err) {
-          // file written on disk
-        }
+        console.error('ERROR: Writing main.css')
       })
     }
   })
