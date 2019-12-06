@@ -48,7 +48,7 @@ pipeline:
       - docker tag pttg-fs-calc-ui quay.io/ukhomeofficedigital/pttg-fs-calc-ui:build-$${DRONE_BUILD_NUMBER}
       - docker push quay.io/ukhomeofficedigital/pttg-fs-calc-ui:build-$${DRONE_BUILD_NUMBER}
     when:
-      branch: master
+      branch: EE-29064-fixing-vulnerabilities
       event: push
 
   tag-docker-image-with-git-tag:
@@ -85,7 +85,7 @@ pipeline:
       - cd kube-pttg-fs-calc-ui
       - ./deploy.sh
     when:
-      branch: master
+      branch: EE-29064-fixing-vulnerabilities
       event: [push, tag]
 
   deployment:
@@ -102,7 +102,7 @@ pipeline:
       - cd kube-pttg-fs-calc-ui
       - ./deploy.sh
     when:
-      event: deployment
+      event: EE-29064-fixing-vulnerabilities
       environment: [dev, test, preprod]
 
   deploy-to-prod:
