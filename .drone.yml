@@ -102,7 +102,7 @@ pipeline:
       - cd kube-pttg-fs-calc-ui
       - ./deploy.sh
     when:
-      event: EE-29064-fixing-vulnerabilities
+      event: master
       environment: [dev, test, preprod]
 
   deploy-to-prod:
