@@ -3,8 +3,7 @@ pipeline:
   npm-audit:
     image: node:12
     commands:
-      # TODO EE-29064 remove skip so that build fails for new errors.
-      - npm audit --audit-level=moderate --only=prod || echo Temporarily skipping failure until EE-29064 is resolved
+      - npm audit --audit-level=moderate --production
     when:
       event: push
 
@@ -22,9 +21,9 @@ pipeline:
     dockerfile: Dockerfile
     image_name: pttg-fs-calc-ui
     local_image: true
-    tolerate: medium
+    tolerate: low
     show_all_vulnerabilities: true
-    fail_on_detection: false # TODO EE-29064 Remove this when current vulnerabilities are resolved
+    fail_on_detection: false # TODO EE-29635 Remove this when current vulnerabilities are resolved
     when:
       event: push
 
@@ -49,7 +48,7 @@ pipeline:
       - docker tag pttg-fs-calc-ui quay.io/ukhomeofficedigital/pttg-fs-calc-ui:build-$${DRONE_BUILD_NUMBER}
       - docker push quay.io/ukhomeofficedigital/pttg-fs-calc-ui:build-$${DRONE_BUILD_NUMBER}
     when:
-      branch: master
+      branch: EE-29064-fixing-vulnerabilities
       event: push
 
   tag-docker-image-with-git-tag:
@@ -86,7 +85,7 @@ pipeline:
       - cd kube-pttg-fs-calc-ui
       - ./deploy.sh
     when:
-      branch: master
+      branch: EE-29064-fixing-vulnerabilities
       event: [push, tag]
 
   deployment:
@@ -103,7 +102,7 @@ pipeline:
       - cd kube-pttg-fs-calc-ui
       - ./deploy.sh
     when:
-      event: deployment
+      event: master
       environment: [dev, test, preprod]
 
   deploy-to-prod:
