@@ -102,7 +102,7 @@ pipeline:
       - cd kube-pttg-fs-calc-ui
       - ./deploy.sh
     when:
-      event: master
+      event: deployment
       environment: [dev, test, preprod]
 
   deploy-to-prod:
